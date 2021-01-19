@@ -17,6 +17,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "pdftest" */ "../views/PdfTest.vue"),
   },
+  {
+    path: "/Viewer",
+    name: "viewer",
+    component: () =>
+      import(/* webpackChunkName: "viewer" */ "../views/Viewer.vue"),
+  },
 ];
 
 const router = createRouter({
