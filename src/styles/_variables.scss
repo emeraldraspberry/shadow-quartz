@@ -1,0 +1,12 @@
+$base-bg-color: #000;
+$base-bg-color-lighten-1: lighten($base-bg-color, 2%);
+$base-bg-color-lighten-2: lighten($base-bg-color, 4%);
+$base-bg-color-lighten-3: lighten($base-bg-color, 6%);
+$base-bg-color-lighten-4: lighten($base-bg-color, 8%);
+$base-bg-color-lighten-5: lighten($base-bg-color, 10%);
+$base-bg-color-lighten-6: lighten($base-bg-color, 20%);
+$base-bg-color-lighten-7: lighten($base-bg-color, 50%);
+$base-bg-color-lighten-8: lighten($base-bg-color, 75%);
+$base-bg-color-lighten-9: lighten($base-bg-color, 87.5%);
+
+$base-text-color: #fff;
