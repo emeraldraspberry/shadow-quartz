@@ -1,6 +1,6 @@
 # shadow-quartz
 
-An open-source .pdf reader and shadow library downloader. Built in Electron 9 using Vue 3.x, Vuex, Vue Router, Wave UI. Integrates with the Mozilla supported PDF.js library.
+An open-source .pdf reader and shadow library downloader. Built in Electron 9 using Vue 3.x, Vuex, Vue Router, and Wave UI. Integrates with the Mozilla supported PDF.js library.
 
 Currently in pre-alpha stages. No standard is set in design, functionality, and compatibility. If interested, clone or download the repository, and follow the project setup steps below.
 
