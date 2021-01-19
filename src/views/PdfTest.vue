@@ -1,5 +1,7 @@
 <template>
-  <canvas id="pdf-canvas"></canvas>
+  <div id="pdftest">
+    <canvas id="pdf-canvas"></canvas>
+  </div>
 </template>
 
 <script>
