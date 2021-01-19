@@ -20,6 +20,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/pdftest",
+    name: "Pdftest",
+    component: () => import("../views/PdfTest.vue"),
+  },
 ];
 
 const router = createRouter({
