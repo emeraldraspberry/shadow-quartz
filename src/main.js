@@ -12,7 +12,7 @@ const app = createApp({
 
 new WaveUI(app, {
   // Wave UI options
-  iconLigatures: "material-icons",
+  iconsLigature: "material-icons",
 });
 
 app
