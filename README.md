@@ -1,5 +1,10 @@
 # shadow-quartz
 
+An open-source .pdf reader and shadow library downloader. 
+
+Currently in pre-alpha stages. No standard is set in design, functionality, and compatibility. If interested, clone or download the repository, and follow the project setup steps below.
+
+
 ## Project setup
 ```
 yarn install
@@ -7,12 +12,12 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn electron:serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+yarn electron:build
 ```
 
 ### Run your unit tests
