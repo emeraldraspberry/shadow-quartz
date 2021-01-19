@@ -21,8 +21,8 @@
   font-family: "Varela-Round", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background-color: $base-bg-color;
+  color: darken($base-text-color, 12.5%);
 }
 
 h1,
@@ -31,5 +31,9 @@ h3,
 h4,
 h5 {
   font-family: "Lato-Black", "Gill Sans", Calibri, "Trebuchet MS", sans-serif;
+}
+
+a {
+  color: darken($base-text-color, 5%);
 }
 </style>
