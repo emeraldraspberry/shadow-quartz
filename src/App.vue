@@ -1,10 +1,12 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/pdftest">Pdftest</router-link> |
-    <router-link to="/viewer">Viewer</router-link>
-  </div>
-  <router-view />
+  <w-app>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/pdftest">Pdftest</router-link> |
+      <router-link to="/viewer">Viewer</router-link>
+    </div>
+    <router-view />
+  </w-app>
 </template>
 
 <style lang="scss">
@@ -24,6 +26,10 @@
   -moz-osx-font-smoothing: grayscale;
   background-color: $base-bg-color;
   color: darken($base-text-color, 12.5%);
+}
+
+html {
+  background-color: $base-bg-color;
 }
 
 h1,
