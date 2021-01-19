@@ -20,15 +20,15 @@ export default {
 
       loadingTask.promise.then((pdf) => {
         pdf.getPage(1).then((page) => {
-          var scale = 1.5;
-          var viewport = page.getViewport({ scale: scale });
+          let scale = 1;
+          let viewport = page.getViewport({ scale: scale });
 
-          var canvas = document.getElementById("pdf-canvas");
-          var context = canvas.getContext("2d");
+          let canvas = document.getElementById("pdf-canvas");
+          let context = canvas.getContext("2d");
           canvas.height = viewport.height;
           canvas.width = viewport.width;
 
-          var renderContext = {
+          const renderContext = {
             canvasContext: context,
             viewport: viewport,
           };
