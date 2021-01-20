@@ -19,3 +19,5 @@ app
   .use(store)
   .use(router)
   .mount("#app");
+
+app.config.globalProperties.$store = store;
