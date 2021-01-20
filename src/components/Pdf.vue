@@ -30,7 +30,7 @@ export default {
 
         loadingTask.promise.then((pdf) => {
           pdf.getPage(1).then((page) => {
-            let scale = 1;
+            let scale = 1.25;
             let viewport = page.getViewport({ scale: scale });
 
             let canvas = document.getElementById("pdf-canvas");
