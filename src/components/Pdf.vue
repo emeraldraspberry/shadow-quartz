@@ -19,6 +19,9 @@ export default {
       return "local-resource://" + this.pdfPath;
     },
   },
+  updated() {
+    this.getPdf();
+  },
   mounted() {
     this.getPdf();
   },
