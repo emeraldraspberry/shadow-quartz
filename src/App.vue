@@ -2,8 +2,8 @@
   <w-app>
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/pdftest">Pdftest</router-link> |
-      <router-link to="/viewer">Viewer</router-link>
+      <router-link to="/viewer">Viewer</router-link> |
+      <router-link to="/pdftest">Pdftest</router-link>
     </div>
     <router-view />
   </w-app>
