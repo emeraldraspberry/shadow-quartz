@@ -19,20 +19,25 @@ export default {
       return "local-resource://" + this.pdfPath;
     },
   },
+  data() {
+    return {
+      pdfPage: 1,
+    };
+  },
   updated() {
     this.getPdf();
   },
   mounted() {
     this.getPdf();
+    console.log(this.$store.state.pdf.page);
   },
   methods: {
     getPdf() {
       if (this.pdfPath.length !== 0) {
-        console.log("getPdf() called");
         const loadingTask = pdfjsLib.getDocument(this.localPdfPath);
 
         loadingTask.promise.then((pdf) => {
-          pdf.getPage(1).then((page) => {
+          pdf.getPage(this.pdfPage).then((page) => {
             let scale = 1.25;
             let viewport = page.getViewport({ scale: scale });
 
@@ -45,6 +50,12 @@ export default {
               canvasContext: context,
               viewport: viewport,
             };
+
+            // Update pdf store module
+            this.$store.state.pdf.page = this.pdfPage;
+            this.$store.state.pdf.pageTotal = pdf.numPages;
+            this.$store.state.pdf.scale = scale;
+
             page.render(renderContext);
           });
         });

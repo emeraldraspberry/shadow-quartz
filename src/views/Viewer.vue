@@ -58,11 +58,17 @@ export default {
     return {
       isPathReceived: false,
       path: "",
-      page: 0,
-      pageTotal: 0,
       scaleFactor: 1.0,
       findQuery: "",
     };
+  },
+  computed: {
+    page() {
+      return this.$store.state.pdf.page;
+    },
+    pageTotal() {
+      return this.$store.state.pdf.pageTotal;
+    },
   },
   methods: {
     openFile() {
