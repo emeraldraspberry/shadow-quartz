@@ -1,8 +1,16 @@
 import { createStore } from "vuex";
 
-export default createStore({
-  state: {},
+import Pdf from "./Pdf";
+
+const store = createStore({
+  state() {
+    return {};
+  },
   mutations: {},
   actions: {},
-  modules: {}
+  modules: {
+    pdf: Pdf,
+  },
 });
+
+export default store;
