@@ -29,7 +29,7 @@
       <w-input
         placeholder="1.00"
         id="scale-input"
-        v-model="scaleFactor"
+        v-model="scale"
         outline
         bg-color="grey-dark5"
         color="white"
@@ -58,7 +58,6 @@ export default {
     return {
       isPathReceived: false,
       path: "",
-      scaleFactor: 1.0,
       findQuery: "",
     };
   },
@@ -68,6 +67,9 @@ export default {
     },
     pageTotal() {
       return this.$store.state.pdf.pageTotal;
+    },
+    scale() {
+      return this.$store.state.pdf.scale;
     },
   },
   methods: {
