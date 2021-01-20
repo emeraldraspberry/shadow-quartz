@@ -1,6 +1,6 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, protocol, BrowserWindow, ipcMain, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import path from "path";
@@ -11,9 +11,11 @@ protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } },
 ]);
 
+let win = null;
+
 async function createWindow() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -96,3 +98,19 @@ if (isDevelopment) {
     });
   }
 }
+
+ipcMain.on("open-file", (event, args) => {
+  if (args === undefined || args === null) {
+    dialog
+      .showOpenDialog(win, {
+        properties: ["openFile"],
+        filters: [{ name: "Portable Document Files", extensions: ["pdf"] }],
+      })
+      .then((obj) => {
+        // File dialog not canceled and file was selected
+        if (!obj.canceled && obj.filePaths.length !== 0) {
+          event.reply("return-file-path", obj.filePaths[0]);
+        }
+      });
+  }
+});
