@@ -6,6 +6,8 @@
       <w-input
         placeholder="file path"
         id="path-input"
+        v-model="path"
+        @keyup.enter="enterPath"
         outline
         bg-color="grey-dark5"
         color="white"
@@ -14,11 +16,12 @@
       <w-input
         placeholder="0"
         id="page-input"
+        v-model="page"
         outline
         bg-color="grey-dark5"
         color="white"
       ></w-input>
-      <p id="page-index">(y of x)</p>
+      <p id="page-index">({{ page }} of {{ pageTotal }})</p>
       <w-icon xl>material-icons first_page</w-icon>
       <w-icon xl>material-icons chevron_left</w-icon>
       <w-icon xl>material-icons chevron_right</w-icon>
@@ -26,6 +29,7 @@
       <w-input
         placeholder="1.00"
         id="scale-input"
+        v-model="scaleFactor"
         outline
         bg-color="grey-dark5"
         color="white"
@@ -33,12 +37,13 @@
       <p>Find</p>
       <w-input
         id="find-input"
+        v-model="findQuery"
         outline
         bg-color="grey-dark5"
         color="white"
       ></w-input>
     </div>
-    <Pdf v-if="path" :pdfPath="path"></Pdf>
+    <Pdf v-if="isPathReceived" :pdfPath="path"></Pdf>
   </div>
 </template>
 
@@ -51,7 +56,12 @@ export default {
   },
   data() {
     return {
+      isPathReceived: false,
       path: "",
+      page: 0,
+      pageTotal: 0,
+      scaleFactor: 1.0,
+      findQuery: "",
     };
   },
   methods: {
@@ -59,10 +69,14 @@ export default {
       console.log("openFile() call");
       window.ipcRenderer.send("open-file");
     },
+    enterPath() {
+      this.isPathReceived = true;
+    },
   },
   mounted() {
     window.ipcRenderer.on("return-file-path", (event, path) => {
       this.path = path;
+      this.isPathReceived = true;
     });
   },
   unmounted() {
