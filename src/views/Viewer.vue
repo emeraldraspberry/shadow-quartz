@@ -33,6 +33,8 @@
         bg-color="grey-dark5"
         color="white"
       ></w-input>
+      <w-icon xl @click="true">material-icons swap_horiz</w-icon>
+      <w-icon xl @click="true">material-icons swap_vert</w-icon>
       <p>Find</p>
       <w-input
         id="find-input"
