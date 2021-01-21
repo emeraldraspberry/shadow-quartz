@@ -61,13 +61,16 @@ export default {
   data() {
     return {
       isPathReceived: false,
-      pathInput: "",
+      pathInput: this.$store.state.pdf.path,
       pageInput: this.$store.state.pdf.page,
       scaleInput: this.$store.state.pdf.scale,
       findQuery: "",
     };
   },
   computed: {
+    path() {
+      return this.$store.state.pdf.path;
+    },
     page() {
       return this.$store.state.pdf.page;
     },
@@ -86,8 +89,14 @@ export default {
     enterPath() {
       this.isPathReceived = true;
     },
+    doesPathExists() {
+      if (this.path.length !== 0) {
+        this.isPathReceived = true;
+      }
+    },
   },
   mounted() {
+    this.doesPathExists();
     window.ipcRenderer.on("return-file-path", (event, path) => {
       this.pathInput = path;
       this.isPathReceived = true;
