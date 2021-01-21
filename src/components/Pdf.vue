@@ -12,32 +12,35 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
 export default {
   name: "Pdf",
   props: {
-    pdfPath: String,
+    path: String,
+    page: Number,
+    scale: Number,
   },
   computed: {
     localPdfPath() {
-      return "local-resource://" + this.pdfPath;
+      return "local-resource://" + this.path;
     },
   },
   data() {
     return {
-      pdfPage: 1,
+      loadingTask: null,
     };
   },
   updated() {
+    this.loadingTask.destroy();
     this.getPdf();
   },
   mounted() {
     this.getPdf();
-    console.log(this.$store.state.pdf.page);
   },
   methods: {
     getPdf() {
-      if (this.pdfPath.length !== 0) {
-        const loadingTask = pdfjsLib.getDocument(this.localPdfPath);
+      if (this.path.length !== 0) {
+        this.loadingTask = pdfjsLib.getDocument(this.localPdfPath);
 
-        loadingTask.promise.then((pdf) => {
-          pdf.getPage(this.pdfPage).then((page) => {
+        console.log(this.page);
+        this.loadingTask.promise.then((pdf) => {
+          pdf.getPage(this.page).then((page) => {
             let scale = 1.25;
             let viewport = page.getViewport({ scale: scale });
 
@@ -52,9 +55,10 @@ export default {
             };
 
             // Update pdf store module
-            this.$store.state.pdf.page = this.pdfPage;
+            this.$store.state.pdf.path = this.path;
+            this.$store.state.pdf.page = this.page;
             this.$store.state.pdf.pageTotal = pdf.numPages;
-            this.$store.state.pdf.scale = scale;
+            this.$store.state.pdf.scale = this.scale;
 
             page.render(renderContext);
           });

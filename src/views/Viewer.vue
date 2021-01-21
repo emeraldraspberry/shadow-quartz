@@ -6,7 +6,7 @@
       <w-input
         placeholder="file path"
         id="path-input"
-        v-model="path"
+        v-model="pathInput"
         @keyup.enter="enterPath"
         outline
         bg-color="grey-dark5"
@@ -14,9 +14,8 @@
       ></w-input>
       <p>Page</p>
       <w-input
-        placeholder="0"
         id="page-input"
-        v-model="page"
+        v-model.number="pageInput"
         outline
         bg-color="grey-dark5"
         color="white"
@@ -29,7 +28,7 @@
       <w-input
         placeholder="1.00"
         id="scale-input"
-        v-model="scale"
+        v-model.number="scaleInput"
         outline
         bg-color="grey-dark5"
         color="white"
@@ -43,7 +42,7 @@
         color="white"
       ></w-input>
     </div>
-    <Pdf v-if="isPathReceived" :pdfPath="path"></Pdf>
+    <Pdf v-if="isPathReceived" :path="pathInput" :page="pageInput"></Pdf>
   </div>
 </template>
 
@@ -57,7 +56,9 @@ export default {
   data() {
     return {
       isPathReceived: false,
-      path: "",
+      pathInput: "",
+      pageInput: this.$store.state.pdf.page,
+      scaleInput: this.$store.state.pdf.scale,
       findQuery: "",
     };
   },
@@ -83,7 +84,7 @@ export default {
   },
   mounted() {
     window.ipcRenderer.on("return-file-path", (event, path) => {
-      this.path = path;
+      this.pathInput = path;
       this.isPathReceived = true;
     });
   },
