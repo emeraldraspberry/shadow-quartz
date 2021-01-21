@@ -27,10 +27,12 @@ export default {
     };
   },
   updated() {
+    console.log(this.$el, "updated");
     this.loadingTask.destroy();
     this.getPdf();
   },
   mounted() {
+    console.log(this.$el, "mounted");
     this.getPdf();
   },
   methods: {

@@ -21,10 +21,10 @@
         color="white"
       ></w-input>
       <p id="page-index">({{ page }} of {{ pageTotal }})</p>
-      <w-icon xl>material-icons first_page</w-icon>
-      <w-icon xl>material-icons chevron_left</w-icon>
-      <w-icon xl>material-icons chevron_right</w-icon>
-      <w-icon xl>material-icons last_page</w-icon>
+      <w-icon xl @click="firstPage">material-icons first_page</w-icon>
+      <w-icon xl @click="decrementPage">material-icons chevron_left</w-icon>
+      <w-icon xl @click="incrementPage">material-icons chevron_right</w-icon>
+      <w-icon xl @click="lastPage">material-icons last_page</w-icon>
       <w-input
         placeholder="1.00"
         id="scale-input"
@@ -42,12 +42,23 @@
         color="white"
       ></w-input>
     </div>
-    <Pdf
-      v-if="isPathReceived"
-      :path="pathInput"
-      :page="pageInput"
-      :scale="scaleInput"
-    ></Pdf>
+    <!-- Key events are placed on a div container, since adding them
+     on the Pdf component will fire an unwanted update in Pdf. -->
+    <div
+      ref="keydown"
+      @keydown.left="decrementPage"
+      @keydown.right="incrementPage"
+      @keydown.home="firstPage"
+      @keydown.end="lastPage"
+      tabindex="0"
+    >
+      <Pdf
+        v-if="isPathReceived"
+        :path="pathInput"
+        :page="pageInput"
+        :scale="scaleInput"
+      ></Pdf>
+    </div>
   </div>
 </template>
 
@@ -94,16 +105,65 @@ export default {
         this.isPathReceived = true;
       }
     },
+    incrementPage() {
+      if (this.pageInput < this.pageTotal) {
+        this.pageInput += 1;
+      }
+    },
+    decrementPage() {
+      if (this.pageInput > 1) {
+        this.pageInput -= 1;
+      }
+    },
+    firstPage() {
+      this.pageInput = 1;
+    },
+    lastPage() {
+      this.pageInput = this.pageTotal;
+    },
+    incrementScale() {
+      this.scaleInput = Math.round((this.scaleInput + 0.1) * 100) / 100;
+    },
+    decrementScale() {
+      if (this.scaleInput > 0) {
+        this.scaleInput = Math.round((this.scaleInput - 0.1) * 100) / 100;
+      }
+    },
+    // Vue 3.x doesn't support uncommon key modifiers such as
+    // @keydown.ctrl.equal
+    // Comment, notify, or pull request if there is a better way
+    onKey(event) {
+      if (event === undefined) {
+        return;
+      }
+      switch (event.code) {
+        case "Equal":
+          this.incrementScale();
+          break;
+        case "Minus":
+          this.decrementScale();
+          break;
+        default:
+          break;
+      }
+    },
   },
   mounted() {
+    if (this.$nextTick) {
+      this.$refs["keydown"].addEventListener("keydown", this.onKey);
+    }
+    // PDF load check
     this.doesPathExists();
     window.ipcRenderer.on("return-file-path", (event, path) => {
       this.pathInput = path;
       this.isPathReceived = true;
     });
   },
+  beforeUnmount() {
+    this.$refs["keydown"].removeEventListener("keydown", this.onKey);
+  },
   unmounted() {
-    window.ipcRenderer.removeAllListeners();
+    window.ipcRenderer.removeAllListeners().className;
   },
 };
 </script>
