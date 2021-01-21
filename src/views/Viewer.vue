@@ -1,6 +1,6 @@
 <template>
-  <div id="viewer">
-    <div id="viewer-controls" class="w-flex justify-left align-center">
+  <div id="viewer" class="w-flex column">
+    <div id="viewer-controls" class="w-flex justify-left align-center no-grow">
       <w-icon class="icon" xl>material-icons view_list</w-icon>
       <w-icon xl @click="openFile">material-icons folder_open</w-icon>
       <w-input
@@ -33,8 +33,8 @@
         bg-color="grey-dark5"
         color="white"
       ></w-input>
-      <w-icon xl @click="true">material-icons swap_horiz</w-icon>
-      <w-icon xl @click="true">material-icons swap_vert</w-icon>
+      <w-icon xl @click="doFitWidth = true">material-icons swap_horiz</w-icon>
+      <w-icon xl @click="doFitHeight = true">material-icons swap_vert</w-icon>
       <p>Find</p>
       <w-input
         id="find-input"
@@ -48,17 +48,23 @@
      on the Pdf component will fire an unwanted update in Pdf. -->
     <div
       ref="keydown"
+      class="grow w-flex"
       @keydown.left="decrementPage"
       @keydown.right="incrementPage"
       @keydown.home="firstPage"
       @keydown.end="lastPage"
       tabindex="0"
     >
+      <!-- Pdf gets updated twice upon adjusting fit width and fit height.
+     Find a better way. -->
       <Pdf
         v-if="isPathReceived"
         :path="pathInput"
         :page="pageInput"
         :scale="scaleInput"
+        :doFitWidth="doFitWidth"
+        :doFitHeight="doFitHeight"
+        @done-fit-adjust="updateScale"
       ></Pdf>
     </div>
   </div>
@@ -77,6 +83,8 @@ export default {
       pathInput: this.$store.state.pdf.path,
       pageInput: this.$store.state.pdf.page,
       scaleInput: this.$store.state.pdf.scale,
+      doFitWidth: false,
+      doFitHeight: false,
       findQuery: "",
     };
   },
@@ -96,7 +104,6 @@ export default {
   },
   methods: {
     openFile() {
-      console.log("openFile() call");
       window.ipcRenderer.send("open-file");
     },
     enterPath() {
@@ -130,6 +137,11 @@ export default {
       if (this.scaleInput > 0) {
         this.scaleInput = Math.round((this.scaleInput - 0.1) * 100) / 100;
       }
+    },
+    updateScale() {
+      this.doFitWidth = false;
+      this.doFitHeight = false;
+      this.scaleInput = this.scale;
     },
     // Vue 3.x doesn't support uncommon key modifiers such as
     // @keydown.ctrl.equal
