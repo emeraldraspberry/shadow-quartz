@@ -1,8 +1,9 @@
 const Pdf = {
   state: () => {
     return {
+      path: "",
       page: 1,
-      pageTotal: 0,
+      pageTotal: 1,
       scale: 1.25,
     };
   },
