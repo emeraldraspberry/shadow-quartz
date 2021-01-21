@@ -41,8 +41,7 @@ export default {
         console.log(this.page);
         this.loadingTask.promise.then((pdf) => {
           pdf.getPage(this.page).then((page) => {
-            let scale = 1.25;
-            let viewport = page.getViewport({ scale: scale });
+            let viewport = page.getViewport({ scale: this.scale });
 
             let canvas = document.getElementById("pdf-canvas");
             let context = canvas.getContext("2d");

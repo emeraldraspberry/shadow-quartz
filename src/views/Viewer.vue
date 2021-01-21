@@ -42,7 +42,12 @@
         color="white"
       ></w-input>
     </div>
-    <Pdf v-if="isPathReceived" :path="pathInput" :page="pageInput"></Pdf>
+    <Pdf
+      v-if="isPathReceived"
+      :path="pathInput"
+      :page="pageInput"
+      :scale="scaleInput"
+    ></Pdf>
   </div>
 </template>
 
