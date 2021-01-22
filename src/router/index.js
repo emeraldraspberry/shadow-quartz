@@ -12,12 +12,6 @@ const routes = [
     component: Home,
   },
   {
-    path: "/pdftest",
-    name: "Pdftest",
-    component: () =>
-      import(/* webpackChunkName: "pdftest" */ "../views/PdfTest.vue"),
-  },
-  {
     path: "/Viewer",
     name: "viewer",
     component: () =>
