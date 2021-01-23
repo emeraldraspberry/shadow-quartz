@@ -48,6 +48,19 @@
       </template>
       <slot></slot>
     </w-dialog>
+    <w-dialog
+      v-else-if="status.includes('welcome')"
+      content-class="grey-dark5--bg"
+      title-class="indigo-dark5--bg"
+      transition="bounce"
+      persistent
+    >
+      <template #title>
+        <w-icon xl class="mr2">material-icons new_releases</w-icon>
+        Welcome
+      </template>
+      <slot></slot>
+    </w-dialog>
   </div>
 </template>
 
@@ -60,7 +73,10 @@ export default {
       default: "info",
       validator: (value) => {
         // Must match a string
-        return ["success", "error", "warning", "info"].indexOf(value) !== -1;
+        return (
+          ["success", "error", "warning", "info", "welcome"].indexOf(value) !==
+          -1
+        );
       },
     },
   },
