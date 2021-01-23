@@ -23,6 +23,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "shadows" */ "../views/Shadows.vue"),
   },
+  {
+    path: "/Library",
+    name: "library",
+    component: () =>
+      import(/* webpackChunkName: "library" */ "../views/Library.vue"),
+  },
 ];
 
 const router = createRouter({
