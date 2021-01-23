@@ -33,6 +33,7 @@ export default {
     window.ipcRenderer.send("load-settings");
     window.ipcRenderer.on("load-settings-reply", (event, args) => {
       this.settings = args.settings;
+      this.vstoreSettings();
     });
     window.ipcRenderer.on("select-directory-reply", (event, args) => {
       if (args) {
@@ -62,6 +63,11 @@ export default {
   methods: {
     selectDirectory() {
       window.ipcRenderer.send("select-directory");
+    },
+    vstoreSettings() {
+      if (!this.isDirectoryPathEmpty) {
+        this.$store.state.app.directoryPath = this.settings.library.path;
+      }
     },
   },
 };
