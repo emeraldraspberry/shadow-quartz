@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 
 import Pdf from "./Pdf";
+import App from "./App";
 
 const store = createStore({
   state() {
@@ -10,6 +11,7 @@ const store = createStore({
   actions: {},
   modules: {
     pdf: Pdf,
+    app: App,
   },
 });
 
