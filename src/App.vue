@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/viewer">Viewer</router-link> |
       <router-link to="/shadows">Shadows</router-link> |
-      <router-link to="/library">Library</router-link>
+      <router-link to="/library">Library</router-link> |
+      <router-link to="/settings">Settings</router-link>
     </div>
     <router-view />
     <MessageDialog status="welcome" v-if="isDirectoryPathEmpty && isNew">
