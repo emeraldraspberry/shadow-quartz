@@ -114,3 +114,61 @@ ipcMain.on("open-file", (event, args) => {
       });
   }
 });
+
+// Load user database for settings
+const Datastore = require("nedb"),
+  db = new Datastore({
+    filename: path.join(
+      require("electron").app.getPath("userData"),
+      "persistentSettings.db"
+    ),
+    autoload: true,
+  });
+
+console.log(db);
+
+ipcMain.on("load-settings", (event) => {
+  db.find({ settings: { $exists: true } }, (err, docs) => {
+    if (Array.isArray(docs) && docs.length === 0) {
+      console.log("No settings field found. Creating one.");
+
+      const doc = {
+        settings: {
+          library: {
+            path: "",
+          },
+        },
+      };
+
+      db.insert(doc);
+      event.reply("load-settings-reply", doc);
+    } else {
+      db.findOne({ settings: { $exists: true } }, (err, doc) => {
+        console.log(doc);
+        event.reply("load-settings-reply", doc);
+      });
+    }
+  });
+});
+
+ipcMain.on("select-directory", (event) => {
+  dialog
+    .showOpenDialog(win, {
+      properties: ["openDirectory"],
+    })
+    .then((result) => {
+      if (!result.canceled) {
+        db.update(
+          { settings: { $exists: true } },
+          { $set: { "settings.library.path": result.filePaths[0] } },
+          {},
+          (err, code) => {
+            event.reply("select-directory-reply", code);
+          }
+        );
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
