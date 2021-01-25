@@ -77,6 +77,12 @@ export default {
   components: {
     Pdf: Pdf,
   },
+  props: {
+    referredPath: {
+      type: String,
+      default: "",
+    },
+  },
   data() {
     return {
       isPathReceived: false,
@@ -110,7 +116,10 @@ export default {
       this.isPathReceived = true;
     },
     doesPathExists() {
-      if (this.path.length !== 0) {
+      if (this.referredPath !== "") {
+        this.pathInput = this.referredPath;
+        this.isPathReceived = true;
+      } else if (this.path.length !== 0) {
         this.isPathReceived = true;
       }
     },
