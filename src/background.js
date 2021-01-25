@@ -4,6 +4,7 @@ import { app, protocol, BrowserWindow, ipcMain, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import path from "path";
+import fs from "fs";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -171,4 +172,43 @@ ipcMain.on("select-directory", (event) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+ipcMain.on("get-library-files", (event, args) => {
+  if (args.length !== 0) {
+    const root = args + "/library";
+
+    fs.readdir(root, { withFileTypes: true }, (err, files) => {
+      let dirList = [];
+
+      files.forEach((file) => {
+        if (file.isDirectory()) {
+          dirList.push(root + "/" + file.name);
+        } else if (file.isFile()) {
+          fileList.push(root + "/" + file.name);
+        }
+      });
+
+      let oldStr = null;
+      let newStr = null;
+
+      if (dirList.length !== 0) {
+        dirList.forEach((dir) => {
+          fs.readdir(dir, { withFileTypes: true }, (err, files) => {
+            let fileList = [];
+
+            files.forEach((file) => {
+              if (file.isFile()) {
+                oldStr = dir + "/" + file.name;
+                newStr = oldStr.valueOf();
+                fileList.push(newStr);
+              }
+            });
+
+            event.reply("get-library-files-reply", fileList);
+          });
+        });
+      }
+    });
+  }
 });
