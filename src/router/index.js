@@ -12,26 +12,33 @@ const routes = [
     component: Home,
   },
   {
-    path: "/Viewer",
-    name: "viewer",
+    path: "/viewer/:referredPath",
+    name: "Viewer.get",
+    props: true,
     component: () =>
       import(/* webpackChunkName: "viewer" */ "../views/Viewer.vue"),
   },
   {
-    path: "/Shadows",
-    name: "shadows",
+    path: "/viewer",
+    name: "Viewer",
+    component: () =>
+      import(/* webpackChunkName: "viewer" */ "../views/Viewer.vue"),
+  },
+  {
+    path: "/shadows",
+    name: "Shadows",
     component: () =>
       import(/* webpackChunkName: "shadows" */ "../views/Shadows.vue"),
   },
   {
-    path: "/Library",
-    name: "library",
+    path: "/library",
+    name: "Library",
     component: () =>
       import(/* webpackChunkName: "library" */ "../views/Library.vue"),
   },
   {
-    path: "/Settings",
-    name: "settings",
+    path: "/settings",
+    name: "Settings",
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/Settings.vue"),
   },
