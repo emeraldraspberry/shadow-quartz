@@ -34,20 +34,41 @@
         DRM
       </a>
     </div>
-    <div>
-      <h1>Continue</h1>
-      <div id="recent-pdf-container"></div>
+    <div class="w-flex grow column">
+      <h1>Recent</h1>
+      <div id="recent" class="w-flex wrap">
+        <CoverCard
+          v-for="item in historyList"
+          :key="item"
+          :path="item"
+        ></CoverCard>
+      </div>
       <h1>Important</h1>
-      <div id="continue-pdf-container"></div>
-      <div id=""></div>
+      <div id="important" class="w-flex wrap"></div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import CoverCard from "@/components/CoverCard";
 
 export default {
   name: "Home",
+  components: {
+    CoverCard: CoverCard,
+  },
+  data() {
+    return {
+      historyList: this.$store.state.app.historyList,
+    };
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+#recent,
+#important {
+  max-height: min-content;
+}
+</style>

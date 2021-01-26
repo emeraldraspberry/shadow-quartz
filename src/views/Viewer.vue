@@ -118,6 +118,8 @@ export default {
     doesPathExists() {
       if (this.referredPath !== "") {
         this.pathInput = this.referredPath;
+
+        this.$store.state.app.historyList.push(this.pathInput);
         this.isPathReceived = true;
       } else if (this.path.length !== 0) {
         this.isPathReceived = true;
