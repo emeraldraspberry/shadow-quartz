@@ -34,7 +34,7 @@
         DRM
       </a>
     </div>
-    <div class="w-flex grow column">
+    <div class="ml2 w-flex grow column">
       <h1>Recent</h1>
       <div id="recent" class="w-flex wrap">
         <CoverCard
