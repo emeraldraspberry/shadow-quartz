@@ -2,6 +2,7 @@ const App = {
   state: () => {
     return {
       directoryPath: "",
+      historyList: [],
     };
   },
 };
