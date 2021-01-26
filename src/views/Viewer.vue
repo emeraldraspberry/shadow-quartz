@@ -1,5 +1,5 @@
 <template>
-  <div id="viewer" class="w-flex column">
+  <div id="viewer" class="mt1 w-flex column">
     <div id="viewer-controls" class="w-flex justify-left align-center no-grow">
       <w-icon class="icon" xl>material-icons view_list</w-icon>
       <w-icon xl @click="openFile">material-icons folder_open</w-icon>
