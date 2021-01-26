@@ -13,8 +13,16 @@ class PdfData {
 
   get imageUrl() {
     return new Promise((resolve) => {
-      this.documentTask.promise.then((pdf) => {
-        pdf.getPage(1).then((page) => {
+      this.documentTask.promise
+        .then(async (pdf) => {
+          let page = await pdf.getPage(1);
+          return {
+            page,
+            pdf,
+          };
+        })
+        .then(async (object) => {
+          let { page: page, pdf: pdf } = object;
           let viewport = page.getViewport({ scale: 1 });
           let canvas = document.createElement("canvas");
           let context = canvas.getContext("2d");
@@ -27,15 +35,21 @@ class PdfData {
             viewport: viewport,
           };
 
-          const renderTask = page.render(renderContext);
-          renderTask.promise.then(() => {
-            resolve(canvas.toDataURL("image/png"));
+          const renderTask = await page.render(renderContext).promise;
+          renderTask;
 
-            // Free pdf instance for memory reallocation
-            pdf.destroy();
-          });
+          return {
+            canvas,
+            pdf,
+          };
+        })
+        .then((object) => {
+          let { canvas: canvas, pdf: pdf } = object;
+
+          resolve(canvas.toDataURL("image/png"));
+          // Free pdf instance for memory reallocation
+          pdf.destroy();
         });
-      });
     });
   }
 
