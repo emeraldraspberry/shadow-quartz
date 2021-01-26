@@ -94,6 +94,26 @@ export default {
   color: darken($base-text-color, 12.5%);
 }
 
+#nav {
+  & > a {
+    padding: 0.125rem;
+    border-radius: 0.125rem;
+
+    background-color: $base-bg-color;
+    transition: all 0.5s;
+  }
+
+  & > a:hover {
+    background-color: invert($base-bg-color);
+    color: invert($base-text-color);
+  }
+
+  .router-link-active {
+    background-color: invert($base-bg-color);
+    color: invert($base-text-color);
+  }
+}
+
 html {
   background-color: $base-bg-color;
 }
