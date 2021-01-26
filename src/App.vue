@@ -1,6 +1,6 @@
 <template>
   <w-app>
-    <div id="nav">
+    <div id="nav" class="ma1">
       <router-link to="/">Home</router-link> |
       <router-link to="/viewer">Viewer</router-link> |
       <router-link to="/shadows">Shadows</router-link> |
