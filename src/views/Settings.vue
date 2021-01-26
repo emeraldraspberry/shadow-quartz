@@ -1,5 +1,5 @@
 <template>
-  <div id="settings">
+  <div id="settings" class="ml2">
     <h1>Settings</h1>
     <w-tabs
       :items="tabs"

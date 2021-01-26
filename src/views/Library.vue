@@ -1,5 +1,5 @@
 <template>
-  <div id="library">
+  <div id="library" class="ml2">
     <h1>Library</h1>
     <div class="w-flex wrap">
       <CoverCard

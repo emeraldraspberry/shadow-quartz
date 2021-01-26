@@ -1,7 +1,7 @@
 <template>
   <div id="home" class="w-flex">
-    <div class="w-flex column no-grow">
-      <h2>Know</h2>
+    <div class="ml2 w-flex column no-grow">
+      <h1>Know</h1>
       <a
         href="https://en.wikipedia.org/wiki/Aaron_Swartz#Open_Access"
         target="_blank"
