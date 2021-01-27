@@ -1,5 +1,5 @@
 <template>
-  <div id="cover-card" class="ma2">
+  <div id="cover-card" class="ma2 w-flex column align-center">
     <w-image
       id="cover-image"
       tag="img"
@@ -8,7 +8,7 @@
       @click="routeLink"
     >
     </w-image>
-    <div id="cover-information">
+    <div id="cover-information" class="mt2">
       <p>{{ title }}</p>
       <p>{{ author }}</p>
     </div>
