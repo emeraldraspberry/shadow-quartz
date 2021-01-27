@@ -30,15 +30,11 @@ export default {
   mounted() {
     this.Data.metaData.then((data) => {
       this.metaData = data;
-      console.log(this.metaData.info.Author, this.metaData.info.Title);
     });
 
     this.Data.imageUrl.then((data) => {
       this.imageData = data;
     });
-  },
-  unmounted() {
-    delete this.Data;
   },
   data() {
     return {
@@ -89,6 +85,7 @@ export default {
   position: relative;
   height: min-content;
   max-width: 240px;
+  word-break: break-all;
 }
 
 #cover-image {
