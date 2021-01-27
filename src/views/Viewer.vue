@@ -113,13 +113,14 @@ export default {
       window.ipcRenderer.send("open-file");
     },
     enterPath() {
+      this.pushHistory(this.pathInput);
       this.isPathReceived = true;
     },
     doesPathExists() {
       if (this.referredPath !== "") {
         this.pathInput = this.referredPath;
 
-        this.$store.state.app.historyList.push(this.pathInput);
+        this.pushHistory(this.pathInput);
         this.isPathReceived = true;
       } else if (this.path.length !== 0) {
         this.isPathReceived = true;
@@ -154,6 +155,20 @@ export default {
       this.doFitHeight = false;
       this.scaleInput = this.scale;
     },
+    pushHistory(path) {
+      const historyList = this.$store.state.app.historyList;
+      const newHistoryList = [];
+
+      // If item already exists, omit in new list.
+      historyList.forEach((item) => {
+        if (item.includes(path) == false) {
+          newHistoryList.push(item);
+        }
+      });
+      newHistoryList.push(path);
+
+      this.$store.state.app.historyList = newHistoryList;
+    },
     // Vue 3.x doesn't support uncommon key modifiers such as
     // @keydown.ctrl.equal
     // Comment, notify, or pull request if there is a better way
@@ -181,6 +196,8 @@ export default {
     this.doesPathExists();
     window.ipcRenderer.on("return-file-path", (event, path) => {
       this.pathInput = path;
+      this.$store.state.app.historyList.push(this.pathInput);
+
       this.isPathReceived = true;
     });
   },
