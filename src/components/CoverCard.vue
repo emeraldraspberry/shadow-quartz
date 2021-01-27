@@ -48,8 +48,8 @@ export default {
       if (
         this.metaData !== null &&
         this.metaData !== undefined &&
-        this.metaData.Author !== "" &&
-        this.metaData.Author !== undefined
+        this.metaData.info.Author !== "" &&
+        this.metaData.info.Author !== undefined
       ) {
         return this.metaData.info.Author;
       } else {
