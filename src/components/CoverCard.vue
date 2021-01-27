@@ -8,9 +8,9 @@
       @click="routeLink"
     >
     </w-image>
-    <div id="cover-information" class="mt2">
-      <p>{{ title }}</p>
-      <p>{{ author }}</p>
+    <div id="cover-information" class="mt2 w-flex column align-left grow">
+      <span class="body text-bold">{{ title }}</span>
+      <span class="body text-italic">{{ author }}</span>
     </div>
   </div>
 </template>
@@ -89,6 +89,10 @@ export default {
 }
 
 #cover-image {
+  width: 100%;
+}
+
+#cover-information {
   width: 100%;
 }
 </style>
