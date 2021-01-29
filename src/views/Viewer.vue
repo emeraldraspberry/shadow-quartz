@@ -65,6 +65,7 @@
         :doFitWidth="doFitWidth"
         :doFitHeight="doFitHeight"
         @done-fit-adjust="updateScale"
+        @page-change="updatePage"
       ></Pdf>
     </div>
   </div>
@@ -155,6 +156,9 @@ export default {
       this.doFitHeight = false;
       this.scaleInput = this.scale;
     },
+    updatePage() {
+      this.pageInput = this.page;
+    },
     pushHistory(path) {
       const historyList = this.$store.state.app.historyList;
       const newHistoryList = [];
@@ -228,6 +232,7 @@ export default {
 }
 
 #viewer-controls {
+  z-index: 9;
   & > * {
     margin-left: 0.25rem;
   }

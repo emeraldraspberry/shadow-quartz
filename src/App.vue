@@ -95,6 +95,8 @@ export default {
 }
 
 #nav {
+  z-index: 99;
+
   & > a {
     padding: 0.125rem;
     border-radius: 0.125rem;
