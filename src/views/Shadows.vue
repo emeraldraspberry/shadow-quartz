@@ -15,7 +15,13 @@
       ></w-select>
     </div>
 
-    <iframe v-if="source" class="w-flex mr2 mb2" :src="source"></iframe>
+    <iframe
+      ref="frame"
+      v-if="source"
+      class="w-flex mr2 mb2"
+      :src="source"
+      sandbox="allow-forms allow-downloads allow-scripts"
+    ></iframe>
   </div>
 </template>
 
