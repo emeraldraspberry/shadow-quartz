@@ -60,7 +60,7 @@ export default {
   },
   data() {
     return {
-      historyList: this.$store.state.app.historyList,
+      historyList: this.$store.state.app.historyList.slice().reverse(),
     };
   },
 };
