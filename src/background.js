@@ -105,7 +105,10 @@ ipcMain.on("open-file", (event, args) => {
     dialog
       .showOpenDialog(win, {
         properties: ["openFile"],
-        filters: [{ name: "Portable Document Files", extensions: ["pdf"] }],
+        filters: [
+          { name: "Portable Document Files", extensions: ["pdf"] },
+          { name: "Electronic Publication Files", extensions: ["epub"] },
+        ],
       })
       .then((obj) => {
         // File dialog not canceled and file was selected
