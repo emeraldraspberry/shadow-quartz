@@ -47,8 +47,19 @@ export default {
         { label: "Mhcs`sx!Fdodrhr!)sr(", value: "iuuq;..mhcfdo/sr" },
         { label: "Mhcs`sx!Fdodrhr!)hr(", value: "iuuq;..mhcfdo/hr" },
         { label: "Mhcs`sx!Fdodrhr!)ru(", value: "iuuq;..mhcfdo/ru" },
+        {
+          label: "Mhcs`sx!Fdodrhr-!Rbhdouhghb!@suhbmdr!)sr(",
+          value: "iuuq;..mhcfdo/sr.rbhl`f",
+        },
+        {
+          label: "Mhcs`sx!Fdodrhr-!Rbhdouhghb!@suhbmdr!)hr(",
+          value: "iuuq;..mhcfdo/hr.rbhl`f.",
+        },
+        {
+          label: "Mhcs`sx!Fdodrhr-!Rbhdouhghb!@suhbmdr!)ru(",
+          value: "iuuq;..mhcfdo/ru.rbhl`f.",
+        },
         { label: "[,Mhcs`sx", value: "iuuqr;..{,mhc/nsf." },
-        { label: "[,Mhcs`sx!)cnnjgh(", value: "iuuq;..do/cnnjgh/odu." },
       ],
     };
   },
