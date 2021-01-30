@@ -58,7 +58,7 @@
       <!-- Pdf gets updated twice upon adjusting fit width and fit height.
      Find a better way. -->
       <Pdf
-        v-if="isPathReceived"
+        v-if="isPathReceived && pathInput.endsWith('pdf')"
         :path="pathInput"
         :page="pageInput"
         :scale="scaleInput"
@@ -67,16 +67,22 @@
         @done-fit-adjust="updateScale"
         @page-change="updatePage"
       ></Pdf>
+      <Epub
+        v-if="isPathReceived && pathInput.endsWith('epub')"
+        :path="pathInput"
+      ></Epub>
     </div>
   </div>
 </template>
 
 <script>
 import Pdf from "@/components/Pdf";
+import Epub from "@/components/Epub";
 export default {
   name: "Viewer",
   components: {
     Pdf: Pdf,
+    Epub: Epub,
   },
   props: {
     referredPath: {
