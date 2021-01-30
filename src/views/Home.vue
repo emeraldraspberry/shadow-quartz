@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="w-flex">
-    <div class="ml2 w-flex column no-grow">
+    <div v-if="false" class="ml2 w-flex column no-grow">
       <h1>Know</h1>
       <a
         href="https://en.wikipedia.org/wiki/Aaron_Swartz#Open_Access"
